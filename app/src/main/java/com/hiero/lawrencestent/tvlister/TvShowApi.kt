@@ -1,6 +1,10 @@
 package com.hiero.lawrencestent.tvlister
 
 import com.hiero.lawrencestent.tvlister.model.ShowModel
+import com.hiero.lawrencestent.tvlister.model.TvShowResponse
+import io.reactivex.Observable
+import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -8,7 +12,7 @@ import retrofit2.http.GET
  */
 interface TvShowApi {
 
-    @GET("/tv/popular")
-    fun getTvShows() : List<ShowModel>
+    @GET("tv/popular") //to add page variable for pagination
+    fun getTvShows() : Single<TvShowResponse>
 
 }
