@@ -10,13 +10,14 @@ import kotlinx.android.synthetic.main.viewholder_tv_show.view.*
 /**
  * Created by lawrencestent on 2018/03/12.
  */
-class ShowListAdapter(var tvShowDetailPublisher : PublishSubject<ShowModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShowListAdapter(var tvShowDetailPublisher : PublishSubject<ShowModel>,
+                      var onListEndPublisher : PublishSubject<Boolean>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         val TAG = ShowListAdapter::class.java.simpleName
     }
 
-    var tvShows: List<ShowModel> = listOf()
+    var tvShows: MutableList<ShowModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         return ShowListViewHolder(ShowListViewHolder.createView(parent!!))
@@ -35,10 +36,14 @@ class ShowListAdapter(var tvShowDetailPublisher : PublishSubject<ShowModel>) : R
             Log.d(TAG, "GETS HERE")
             tvShowDetailPublisher.onNext(tvShows[position])
         }
+
+        if (position == tvShows.size -1){
+            onListEndPublisher.onNext(true)
+        }
     }
 
     fun updateTvShows(newTvShows: List<ShowModel>){
-        this.tvShows = newTvShows
+        tvShows.addAll(newTvShows)
         notifyDataSetChanged()
     }
 

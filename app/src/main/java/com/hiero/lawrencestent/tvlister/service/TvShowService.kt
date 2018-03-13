@@ -60,7 +60,7 @@ class TvShowService(private val resources: Resources) {
         restAdapter.create(TvShowApi::class.java)
     }
 
-    fun getTvShowList() : Single<TvShowResponse>{
-        return tvShowApi.getTvShows()
+    fun getTvShowList(pageNum: Int) : Single<TvShowResponse>{
+        return tvShowApi.getTvShows(pageNum)
     }
 }
