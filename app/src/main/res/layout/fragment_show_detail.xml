@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/show_detail_title"
@@ -11,25 +12,31 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:gravity="center"
+        android:textSize="@dimen/show_title_size"
+        android:textColor="#FFFFFF"
         />
 
     <TextView
         android:id="@+id/show_detail_overview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.3"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/show_detail_rating"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:textColor="#FFFFFF"
+        android:drawableStart="@drawable/ic_grade_gold_24dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_similar_shows"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2"
+        android:orientation="horizontal"/>
 
 
 
