@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     fun getTvShowList(pageNumber: Int?){
         rxSubs.add(tvShowService?.getTvShowList(pageNumber!!)!!
                 .subscribeOn(Schedulers.newThread())
