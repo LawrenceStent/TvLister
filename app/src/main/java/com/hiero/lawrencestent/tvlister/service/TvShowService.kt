@@ -53,4 +53,8 @@ class TvShowService(private val resources: Resources) {
     fun getTvShowList(pageNum: Int) : Single<TvShowResponse>{
         return tvShowApi.getTvShows(pageNum)
     }
+
+    fun getSimilarShows(id: Int) : Single<TvShowResponse>{
+        return tvShowApi.getSimilarShows(id)
+    }
 }

@@ -14,7 +14,7 @@ interface TvShowApi {
     @GET("tv/popular") //to add page variable for pagination
     fun getTvShows(@Query("page") pageNumber: Int) : Single<TvShowResponse>
 
-    @GET("tv/{tv_id}/get-similar-tv-shows")
+    @GET("tv/{tv_id}/similar")
     fun getSimilarShows(@Path("tv_id") id :Int) : Single<TvShowResponse>
 
 }
