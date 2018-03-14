@@ -27,8 +27,9 @@
             <ImageView
                 android:id="@+id/show_image"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:scaleType="centerInside"
+                android:layout_height="300dp"
+                android:layout_margin="5dp"
+                android:scaleType="fitCenter"
                 />
 
             <TextView
