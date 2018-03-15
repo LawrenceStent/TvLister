@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.model.ShowModel
@@ -45,6 +46,8 @@ class ShowDetailFragment : Fragment() {
     var showDetailModel: ShowModel? = null
     var tvShowService: TvShowService? = null
     var similarShowAdapter : SimilarShowAdapter? = null
+    var getShowProgress: ProgressBar? = null
+    var similarShowList: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater?.inflate(R.layout.fragment_show_detail, container, false)
@@ -52,13 +55,18 @@ class ShowDetailFragment : Fragment() {
         Log.d(TAG, "Opens fragment")
         var args = arguments
         showDetailModel = args.getSerializable(SHOW_DETAIL) as ShowModel
+        
 
         tvShowService = TvShowService(resources)
 
         val title = view?.findViewById<TextView>(R.id.show_detail_title)
         val overview = view?.findViewById<TextView>(R.id.show_detail_overview)
         val rating = view?.findViewById<TextView>(R.id.show_detail_rating)
-        val similarShowList  = view?.findViewById<RecyclerView>(R.id.list_similar_shows)
+        similarShowList  = view?.findViewById<RecyclerView>(R.id.list_similar_shows)
+        similarShowList?.visibility = View.GONE
+
+        getShowProgress = view?.findViewById<ProgressBar>(R.id.similar_progress)
+        getShowProgress?.visibility = View.VISIBLE
 
         title?.text = showDetailModel?.original_name
         overview?.text = showDetailModel?.overview
@@ -79,6 +87,8 @@ class ShowDetailFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({ showRespose ->
                     similarShowAdapter?.updateSimilarShowList(showRespose.results)
+                    getShowProgress?.visibility = View.GONE
+                    similarShowList?.visibility = View.VISIBLE
                 }, { t: Throwable ->
 
                 }))

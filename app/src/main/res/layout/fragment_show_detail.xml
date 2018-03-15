@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:clickable="true"
-    android:background="@color/colorPrimary">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/show_detail_title"
@@ -14,7 +14,8 @@
         android:layout_weight="0.1"
         android:gravity="center"
         android:textSize="@dimen/show_title_size"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -22,14 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:textColor="#FFFFFF"/>
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_margin="5dp"/>
+
 
     <TextView
         android:id="@+id/show_detail_rating"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:text="asd"
         android:layout_gravity="center"
         android:gravity="start|center_vertical"
@@ -40,19 +44,48 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
             android:textSize="16sp"
             android:text="Similar Shows"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_similar_shows"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="horizontal"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/similar_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
     </LinearLayout>
 
 

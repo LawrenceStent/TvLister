@@ -22,7 +22,11 @@
                 android:id="@+id/show_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/show_title_size"/>
+                android:textSize="@dimen/show_title_size"
+                android:textColor="@color/black"
+                android:layout_margin="3dp"
+                android:layout_marginStart="10dp"
+                android:padding="3dp"/>
 
             <ImageView
                 android:id="@+id/show_image"
@@ -30,6 +34,7 @@
                 android:layout_height="300dp"
                 android:layout_margin="5dp"
                 android:scaleType="fitCenter"
+                android:padding="5dp"
                 />
 
             <TextView
@@ -37,7 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_grade_gold_24dp"
-                android:text="rating"/>
+                android:padding="3dp"
+                android:gravity="center_vertical"
+                android:drawablePadding="3dp"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
