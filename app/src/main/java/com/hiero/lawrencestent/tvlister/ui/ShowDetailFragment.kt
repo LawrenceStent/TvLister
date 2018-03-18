@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import android.widget.*
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -83,13 +84,22 @@ class ShowDetailFragment : Fragment() {
     }
 
     fun initToolbar(view: View, showModel: ShowModel){
-        (view.context as AppCompatActivity).setSupportActionBar(view.findViewById<Toolbar>(R.id.toolbar_detail))
+        val activity = (view.context as AppCompatActivity)
+        val mainToolbar = activity.findViewById<Toolbar>(R.id.toolbar_main)
+        mainToolbar.visibility = View.GONE
+        activity.setSupportActionBar(view.findViewById<Toolbar>(R.id.toolbar_detail))
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar_detail)
         toolbar.setTitle(showModel.original_name)
         toolbar.setNavigationIcon(view.context.resources.getDrawable(R.drawable.ic_arrow_back_white_24dp))
 
         toolbar.setNavigationOnClickListener {
             fragmentManager.popBackStack()
+            var backCount = fragmentManager.backStackEntryCount
+            if (backCount == 1){
+                mainToolbar.visibility = View.VISIBLE
+            }
+
+
         }
     }
 
@@ -109,7 +119,7 @@ class ShowDetailFragment : Fragment() {
         overview?.text = showDetailModel.overview
         rating?.text = showDetailModel.vote_average.toString()
 //
-        overview?.background = view.context.getDrawable(R.color.white)
+        overview?.background = view.context.resources.getDrawable(R.color.white)
         overview?.alpha = 0.8f
     }
 
