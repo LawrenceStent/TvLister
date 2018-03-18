@@ -3,6 +3,7 @@ package com.hiero.lawrencestent.tvlister.service
 import android.content.res.Resources
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.TvShowApi
+import com.hiero.lawrencestent.tvlister.model.ShowModel
 import com.hiero.lawrencestent.tvlister.model.TvShowResponse
 import io.reactivex.Single
 import okhttp3.HttpUrl
@@ -46,6 +47,8 @@ class TvShowService(private val resources: Resources) {
 
     }
 
+    private var searchResults: MutableList<String>? = mutableListOf()
+
     private val tvShowApi by lazy {
         restAdapter.create(TvShowApi::class.java)
     }
@@ -56,5 +59,13 @@ class TvShowService(private val resources: Resources) {
 
     fun getSimilarShows(id: Int) : Single<TvShowResponse>{
         return tvShowApi.getSimilarShows(id)
+    }
+
+    fun updateSearchResults(tvShows: List<String>){
+        this.searchResults?.addAll(tvShows)
+    }
+
+    fun getSearchResults(): List<String>{
+        return searchResults!!
     }
 }
