@@ -20,14 +20,9 @@ import com.hiero.lawrencestent.tvlister.service.TvShowService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_show_detail.*
-import android.support.v4.view.ViewCompat.setAlpha
 import android.widget.*
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.viewholder_similar_show.view.*
 
 
 /**
@@ -91,7 +86,7 @@ class ShowDetailFragment : Fragment() {
         (view.context as AppCompatActivity).setSupportActionBar(view.findViewById<Toolbar>(R.id.toolbar_detail))
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar_detail)
         toolbar.setTitle(showModel.original_name)
-        toolbar.setNavigationIcon(view.context.resources.getDrawable(R.drawable.ic_arrow_back_black_24dp))
+        toolbar.setNavigationIcon(view.context.resources.getDrawable(R.drawable.ic_arrow_back_white_24dp))
 
         toolbar.setNavigationOnClickListener {
             fragmentManager.popBackStack()
