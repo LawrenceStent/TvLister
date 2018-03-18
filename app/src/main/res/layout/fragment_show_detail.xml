@@ -1,43 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:clickable="true"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/show_detail_title"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_detail"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <FrameLayout
+        android:id="@+id/big_hero_root"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:gravity="center"
-        android:textSize="@dimen/show_title_size"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:background="@color/black">
 
-    <TextView
-        android:id="@+id/show_detail_overview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:layout_margin="5dp"/>
+        <!--<TextView-->
+            <!--android:id="@+id/show_detail_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="0.1"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="28sp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textStyle="bold"-->
+            <!--/>-->
+
+        <TextView
+            android:id="@+id/show_detail_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center|bottom"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:background="#1AFFFFFF"/>
 
 
-    <TextView
-        android:id="@+id/show_detail_rating"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:textColor="@color/black"
-        android:text="asd"
-        android:layout_gravity="center"
-        android:gravity="start|center_vertical"
-        android:drawableStart="@drawable/ic_grade_gold_24dp"/>
+
+
+    </FrameLayout>
+
+
+
+        <TextView
+            android:id="@+id/show_detail_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="asd"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="start|center_vertical"
+            android:drawableStart="@drawable/ic_grade_gold_24dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
