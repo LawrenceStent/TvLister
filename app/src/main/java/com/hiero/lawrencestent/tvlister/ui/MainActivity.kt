@@ -3,7 +3,11 @@ package com.hiero.lawrencestent.tvlister.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.model.ShowModel
 import com.hiero.lawrencestent.tvlister.service.TvShowService
@@ -44,12 +48,19 @@ class MainActivity : AppCompatActivity() {
 
     var pageCount: Int = 1
 
+    var searchAdapter: ArrayAdapter<String>? = null
+
+//    var autoCompleteSearch : AutoCompleteTextView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tvShowService = TvShowService(resources)
 
+        setSupportActionBar(findViewById<Toolbar>(R.id.toolbar_main))
+
+        initSearchBar()
 
         initAdapter()
 
@@ -62,6 +73,12 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         Log.d(TAG, "GOODBye")
+        var backStack = fragmentManager.backStackEntryCount
+        if (backStack == 1){
+            this.supportActionBar?.show()
+        }else{
+            fragmentManager.popBackStack()
+        }
     }
 
     fun getTvShowList(pageNumber: Int?){
@@ -70,12 +87,36 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({tvList ->
                     Log.d(TAG, "Response: $tvList")
-                    showListAdapter?.updateTvShows(sortListForRating(tvList.results))
+                    val showList = sortListForRating(tvList.results)
+                    tvShowService?.updateSearchResults(showList.map { it.original_name !!})
+                    showListAdapter?.updateTvShows(showList)
+                    updateSearchResults(showList)
 
                 },{ t : Throwable->
                     Log.e(TAG, "Error with request:", t)
                 }))
     }
+
+
+    fun initSearchBar(){
+        searchAdapter = ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, mutableListOf())
+        auto_complete_search.setAdapter(searchAdapter)
+
+        btn_search.setOnClickListener { view ->
+            var search = auto_complete_search.text.toString()
+            var position = tvShowService?.getSearchResults()!!.indexOf(search)
+            list_tv_shows.scrollToPosition(position -1)
+        }
+    }
+
+    fun updateSearchResults(tvShows: List<ShowModel>){
+        var showNames = tvShows.map { it.original_name }
+        var list : Collection<String> = showNames as Collection<String>
+        searchAdapter?.clear()
+        searchAdapter?.addAll(list)
+        searchAdapter?.notifyDataSetChanged()
+    }
+
 
     fun initAdapter(){
         list_tv_shows.layoutManager = LinearLayoutManager(this)
