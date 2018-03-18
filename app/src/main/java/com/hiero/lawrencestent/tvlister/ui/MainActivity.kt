@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        val LOG_TAG = MainActivity::class.java.simpleName
+        val TAG = MainActivity::class.java.simpleName
     }
 
     var tvShowService: TvShowService? = null
@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        Log.d(TAG, "GOODBye")
     }
 
     fun getTvShowList(pageNumber: Int?){
@@ -68,11 +69,11 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({tvList ->
-                    Log.d(LOG_TAG, "Response: $tvList")
-                    showListAdapter?.updateTvShows(tvList.results)
+                    Log.d(TAG, "Response: $tvList")
+                    showListAdapter?.updateTvShows(sortListForRating(tvList.results))
 
                 },{ t : Throwable->
-                    Log.e(LOG_TAG, "Error with request:", t)
+                    Log.e(TAG, "Error with request:", t)
                 }))
     }
 
@@ -92,6 +93,11 @@ class MainActivity : AppCompatActivity() {
             getTvShowList(pageCount)
 
         }))
+    }
+
+    fun sortListForRating(tvShows: List<ShowModel>) : List<ShowModel>{
+        var sortedShows : List<ShowModel> = tvShows.sortedWith(compareByDescending({it.vote_average}))
+        return  sortedShows
     }
 
     fun openShowDetailFragment(showDetail: ShowModel){
