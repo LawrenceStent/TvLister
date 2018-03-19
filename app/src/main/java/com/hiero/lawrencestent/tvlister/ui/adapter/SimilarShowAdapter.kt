@@ -1,4 +1,4 @@
-package com.hiero.lawrencestent.tvlister.ui
+package com.hiero.lawrencestent.tvlister.ui.adapter
 
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.model.ShowModel
+import com.hiero.lawrencestent.tvlister.ui.viewholder.SimilarShowViewHolder
+import com.hiero.lawrencestent.tvlister.ui.fragment.ShowDetailFragment
 import kotlinx.android.synthetic.main.viewholder_similar_show.view.*
 
 /**

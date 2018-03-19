@@ -1,4 +1,4 @@
-package com.hiero.lawrencestent.tvlister.ui
+package com.hiero.lawrencestent.tvlister.ui.viewholder
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

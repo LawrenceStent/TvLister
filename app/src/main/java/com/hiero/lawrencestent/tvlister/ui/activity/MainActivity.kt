@@ -1,4 +1,4 @@
-package com.hiero.lawrencestent.tvlister.ui
+package com.hiero.lawrencestent.tvlister.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,10 +7,11 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.model.ShowModel
 import com.hiero.lawrencestent.tvlister.service.TvShowService
+import com.hiero.lawrencestent.tvlister.ui.fragment.ShowDetailFragment
+import com.hiero.lawrencestent.tvlister.ui.adapter.ShowListAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

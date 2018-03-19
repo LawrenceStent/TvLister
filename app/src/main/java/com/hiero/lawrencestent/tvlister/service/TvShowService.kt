@@ -2,8 +2,7 @@ package com.hiero.lawrencestent.tvlister.service
 
 import android.content.res.Resources
 import com.hiero.lawrencestent.tvlister.R
-import com.hiero.lawrencestent.tvlister.TvShowApi
-import com.hiero.lawrencestent.tvlister.model.ShowModel
+import com.hiero.lawrencestent.tvlister.rest.TvShowApi
 import com.hiero.lawrencestent.tvlister.model.TvShowResponse
 import io.reactivex.Single
 import okhttp3.HttpUrl

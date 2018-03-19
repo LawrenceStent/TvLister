@@ -1,4 +1,4 @@
-package com.hiero.lawrencestent.tvlister
+package com.hiero.lawrencestent.tvlister.rest
 
 import com.hiero.lawrencestent.tvlister.model.TvShowResponse
 import io.reactivex.Single

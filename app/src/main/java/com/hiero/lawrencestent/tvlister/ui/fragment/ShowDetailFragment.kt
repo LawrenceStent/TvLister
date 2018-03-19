@@ -1,9 +1,6 @@
-package com.hiero.lawrencestent.tvlister.ui
+package com.hiero.lawrencestent.tvlister.ui.fragment
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -14,17 +11,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.hiero.lawrencestent.tvlister.R
 import com.hiero.lawrencestent.tvlister.model.ShowModel
 import com.hiero.lawrencestent.tvlister.service.TvShowService
+import com.hiero.lawrencestent.tvlister.ui.adapter.SimilarShowAdapter
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import android.widget.*
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_show_detail.*
 
 
 /**
@@ -35,7 +33,7 @@ class ShowDetailFragment : Fragment() {
     companion object {
         val SHOW_DETAIL = "show_detail"
 
-        fun newInstance(showDetail: ShowModel) : ShowDetailFragment{
+        fun newInstance(showDetail: ShowModel) : ShowDetailFragment {
             val fragment = ShowDetailFragment()
             var args = Bundle()
             args.putSerializable(SHOW_DETAIL, showDetail)

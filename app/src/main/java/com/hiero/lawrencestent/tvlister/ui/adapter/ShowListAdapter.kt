@@ -1,9 +1,10 @@
-package com.hiero.lawrencestent.tvlister.ui
+package com.hiero.lawrencestent.tvlister.ui.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
 import com.hiero.lawrencestent.tvlister.model.ShowModel
+import com.hiero.lawrencestent.tvlister.ui.viewholder.ShowListViewHolder
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.viewholder_tv_show.view.*
 
