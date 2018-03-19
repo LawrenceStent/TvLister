@@ -16,7 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/big_hero_root"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -35,21 +35,29 @@
             <!--android:textStyle="bold"-->
             <!--/>-->
 
+        <ImageView
+            android:id="@+id/big_hero_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"/>
+
         <TextView
             android:id="@+id/show_detail_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:layout_gravity="center|bottom"
-            android:gravity="center"
+            android:layout_alignParentBottom="true"
             android:textSize="14sp"
             android:layout_margin="5dp"
+            android:padding="3dp"
             android:background="#1AFFFFFF"/>
 
 
 
 
-    </FrameLayout>
+    </RelativeLayout>
 
 
 
