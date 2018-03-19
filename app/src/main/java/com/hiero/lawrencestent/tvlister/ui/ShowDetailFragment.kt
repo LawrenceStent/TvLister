@@ -24,6 +24,7 @@ import android.widget.*
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_show_detail.*
 
 
 /**
@@ -59,7 +60,8 @@ class ShowDetailFragment : Fragment() {
     var title : TextView? = null
     var overview: TextView? = null
     var rating: TextView? = null
-    var heroRootLayout: FrameLayout? = null
+    var heroRootLayout: RelativeLayout? = null
+    var bigHeroBackground: ImageView? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater?.inflate(R.layout.fragment_show_detail, container, false)
@@ -104,45 +106,34 @@ class ShowDetailFragment : Fragment() {
     }
 
     fun initViews(view: View, showDetailModel: ShowModel) {
-//        title = view.findViewById<TextView>(R.id.show_detail_title)
+
         overview = view.findViewById<TextView>(R.id.show_detail_overview)
         rating = view.findViewById<TextView>(R.id.show_detail_rating)
         similarShowList = view.findViewById<RecyclerView>(R.id.list_similar_shows)
-
+        bigHeroBackground = view.findViewById<ImageView>(R.id.big_hero_bg)
 
         similarShowList?.visibility = View.GONE
 
         getShowProgress = view.findViewById<ProgressBar>(R.id.similar_progress)
         getShowProgress?.visibility = View.VISIBLE
 
-//        title?.text = showDetailModel.original_name
         overview?.text = showDetailModel.overview
         rating?.text = showDetailModel.vote_average.toString()
-//
+
         overview?.background = view.context.resources.getDrawable(R.color.white)
         overview?.alpha = 0.8f
     }
 
     fun initHeroImage(view: View, show: ShowModel){
-        heroRootLayout = view.findViewById(R.id.big_hero_root) as FrameLayout
+        heroRootLayout = view.findViewById(R.id.big_hero_root) as RelativeLayout
         heroRootLayout?.alpha = 0.95f
+
+        bigHeroBackground?.alpha = 0.95f
 
         Picasso.with(view.context)
                 .load(view.resources?.getString(R.string.image_base_url) + show.poster_path)
-                .into(object : Target {
-
-                            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-                            }
-
-                            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                                heroRootLayout!!.background = BitmapDrawable(bitmap)
-                            }
-
-                            override fun onBitmapFailed(errorDrawable: Drawable?) {
-                                Log.e(TAG, "Hero Background Failed")
-                            }
-                })
+                .fit()
+                .into(bigHeroBackground)
     }
 
     fun getSimilarTvShows(tvShowService: TvShowService, id: Int){
@@ -154,7 +145,7 @@ class ShowDetailFragment : Fragment() {
                     getShowProgress?.visibility = View.GONE
                     similarShowList?.visibility = View.VISIBLE
                 }, { t: Throwable ->
-
+                    Log.e(TAG, "Get shows failed ${t.message}", t)
                 }))
     }
 
