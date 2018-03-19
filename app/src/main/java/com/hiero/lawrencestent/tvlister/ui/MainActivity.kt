@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity() {
 
     var searchAdapter: ArrayAdapter<String>? = null
 
-//    var autoCompleteSearch : AutoCompleteTextView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById<Toolbar>(R.id.toolbar_main))
 
+        progress_main.visibility = View.VISIBLE
         initSearchBar()
 
         initAdapter()
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Log.d(TAG, "GOODBye")
+
         var backStack = fragmentManager.backStackEntryCount
         if (backStack == 1){
             this.supportActionBar?.show()
@@ -87,10 +86,12 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({tvList ->
                     Log.d(TAG, "Response: $tvList")
+                    list_tv_shows.visibility = View.VISIBLE
+                    progress_main.visibility = View.GONE
+
                     val showList = sortListForRating(tvList.results)
-                    tvShowService?.updateSearchResults(showList.map { it.original_name !!})
                     showListAdapter?.updateTvShows(showList)
-                    updateSearchResults(showList)
+                    updateSearchResults(showList.map { it.original_name !!})
 
                 },{ t : Throwable->
                     Log.e(TAG, "Error with request:", t)
@@ -109,9 +110,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun updateSearchResults(tvShows: List<ShowModel>){
-        var showNames = tvShows.map { it.original_name }
-        var list : Collection<String> = showNames as Collection<String>
+    fun updateSearchResults(tvShows: List<String>){
+        tvShowService?.updateSearchResults(tvShows)
+
+        var list = tvShowService?.getSearchResults()!!
         searchAdapter?.clear()
         searchAdapter?.addAll(list)
         searchAdapter?.notifyDataSetChanged()
