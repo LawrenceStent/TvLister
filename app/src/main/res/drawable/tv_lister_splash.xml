@@ -2,12 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/colorPrimary" />
 
     <item>
         <bitmap
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/walter"
             android:gravity="center" />
     </item>
+
+
 
 </layer-list>
